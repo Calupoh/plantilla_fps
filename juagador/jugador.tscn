@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvo4nk81b7vtd"]
+
+[ext_resource type="Script" path="res://juagador/jugador.gd" id="1_uvher"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mdcvk"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_k30ww"]
+
+[node name="Jugador" type="CharacterBody3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+script = ExtResource("1_uvher")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_mdcvk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_k30ww")
+
+[node name="PivoteVista" type="Marker3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="PivoteVista"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.481683, 0)

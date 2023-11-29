@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=3 uid="uid://w14p4b6xx63t"]
+
+[ext_resource type="Texture2D" uid="uid://dtcbofk7mh4xo" path="res://texture_01.png" id="1_fvypw"]
+[ext_resource type="PackedScene" uid="uid://cvo4nk81b7vtd" path="res://juagador/jugador.tscn" id="1_i0oti"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_d7iol"]
+size = Vector2(50, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r8vsr"]
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_fvypw")
+uv1_scale = Vector3(25, 25, 25)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_cbuiw"]
+data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_27g6v"]
+
+[sub_resource type="Sky" id="Sky_6o1r3"]
+sky_material = SubResource("ProceduralSkyMaterial_27g6v")
+
+[sub_resource type="Environment" id="Environment_gsnbl"]
+background_mode = 2
+sky = SubResource("Sky_6o1r3")
+
+[node name="Terreno" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_d7iol")
+surface_material_override/0 = SubResource("StandardMaterial3D_r8vsr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_cbuiw")
+
+[node name="Jugador" parent="." instance=ExtResource("1_i0oti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.222559, 1.20321, -0.0665159)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gsnbl")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.628262, 0.70195, -0.33549, 0, 0.43122, 0.902247, 0.778002, -0.566847, 0.270919, 0, 6.05243, 0)
